@@ -1,0 +1,705 @@
+{
+	"info": {
+		"_postman_id": "64d0fb52-c3a9-4128-8091-76409a1f8308",
+		"name": "UserServiceApp API - Data Driven",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38884460"
+	},
+	"item": [
+		{
+			"name": "Init",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{PASSWORD}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{USER_NAME}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqbin.com/echo/get/json",
+					"protocol": "https",
+					"host": [
+						"reqbin",
+						"com"
+					],
+					"path": [
+						"echo",
+						"get",
+						"json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add New User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const expectedStatus = pm.iterationData.get(\"expectedStatus\");",
+							"",
+							"pm.test(\"Status code \" + expectedStatus, function () {",
+							"    pm.response.to.have.status(expectedStatus);",
+							"});",
+							"pm.execution.setNextRequest(null);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"jsonData\", JSON.stringify(pm.iterationData.toObject()));",
+							"",
+							"var jsonData = JSON.parse(pm.globals.get(\"jsonData\"))",
+							"var expectedStatus = jsonData.expectedStatus",
+							"var requestbody = jsonData.requestbody",
+							"console.log(\"jsonData:\", jsonData)",
+							"console.log(\"jsonData.expectedStatus:\", expectedStatus)",
+							"console.log(\"jsonData.requestbody:\", requestbody)",
+							"",
+							"pm.variables.set(\"requestbody\", JSON.stringify(requestbody));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{PASSWORD}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{USER_NAME}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{{requestbody}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}{{ENDPOINT}}",
+					"host": [
+						"{{BASE_URL}}{{ENDPOINT}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET All Users",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const expectedStatus = pm.iterationData.get(\"expectedStatus\");",
+							"",
+							"pm.test(\"Status code \" + expectedStatus, function () {",
+							"    pm.response.to.have.status(expectedStatus);",
+							"});",
+							"",
+							"pm.execution.setNextRequest(null);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{PASSWORD}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{USER_NAME}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}{{ENDPOINT}}",
+					"host": [
+						"{{BASE_URL}}{{ENDPOINT}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET user by USER ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const expectedUserId = pm.iterationData.get(\"param\");",
+							"const expectedStatus = pm.iterationData.get(\"expectedStatus\");",
+							"",
+							"pm.test(\"Status code \" + expectedStatus, function () {",
+							"    pm.response.to.have.status(expectedStatus);",
+							"});",
+							"",
+							"pm.execution.setNextRequest(null);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"    const userId = pm.iterationData.get(\"param\");",
+							"    pm.variables.set(\"userId\", userId);",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "userapi@october",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "Numpy@gmail.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}{{ENDPOINT}}/{{userId}}",
+					"host": [
+						"{{BASE_URL}}{{ENDPOINT}}"
+					],
+					"path": [
+						"{{userId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET user by USER First Name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const expectedUserFirstName = pm.iterationData.get(\"param\");",
+							"const expectedStatus = pm.iterationData.get(\"expectedStatus\");",
+							"",
+							"pm.test(\"Status code \" + expectedStatus, function () {",
+							"    pm.response.to.have.status(expectedStatus);",
+							"});",
+							"",
+							"pm.execution.setNextRequest(null);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"    const userfirstname = pm.iterationData.get(\"param\");",
+							"    pm.variables.set(\"userfirstname\", userfirstname);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "userapi@october",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "Numpy@gmail.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}{{ENDPOINT}}{{userfirstname}}",
+					"host": [
+						"{{BASE_URL}}{{ENDPOINT}}{{userfirstname}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const expectedStatus = pm.iterationData.get(\"expectedStatus\");",
+							"",
+							"pm.test(\"Status code \" + expectedStatus, function () {",
+							"    pm.response.to.have.status(expectedStatus);",
+							"});",
+							"pm.execution.setNextRequest(null);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Get UserID from userName",
+							"// Get values from iteration data",
+							"//const userFirstName = pm.iterationData.get(\"param\");",
+							"const userFirstName = \"TestUserC\";",
+							"",
+							"// Define the request options",
+							"const requestOptions = {",
+							"    url: 'https://userserviceapp-f5a54828541b.herokuapp.com/uap/users/username/' + userFirstName,",
+							"    method: 'GET', ",
+							"    header: {",
+							"        'Content-Type': 'application/json'",
+							"    }",
+							"};",
+							"",
+							"// Send the request",
+							"pm.sendRequest(requestOptions, function (err, res) {",
+							"    if (err) {",
+							"        console.log(err);",
+							"        return;",
+							"    }",
+							"",
+							"    // Perform assertions on the response if needed",
+							"    pm.test(\"Response status is 200\", function () {",
+							"        pm.expect(res.status).to.eql(\"OK\");        ",
+							"        pm.expect(res.json()[0].user_first_name).to.eql(userFirstName);",
+							"        console.log(res.json()[0].user_id);",
+							"        pm.variables.set(\"userId\", res.json()[0].user_id);",
+							"    });",
+							"});",
+							"",
+							"//Prepare Request Body",
+							"pm.globals.set(\"jsonData\", JSON.stringify(pm.iterationData.toObject()));",
+							"",
+							"var jsonData = JSON.parse(pm.globals.get(\"jsonData\"))",
+							"var requestbody = jsonData.requestbody",
+							"console.log(\"jsonData:\", jsonData)",
+							"console.log(\"jsonData.requestbody:\", requestbody)",
+							"",
+							"pm.variables.set(\"requestbody\", JSON.stringify(requestbody));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{PASSWORD}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{USER_NAME}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{{requestbody}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}{{ENDPOINT}}/{{userId}}",
+					"host": [
+						"{{BASE_URL}}{{ENDPOINT}}"
+					],
+					"path": [
+						"{{userId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User By user first name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const expectedStatus = pm.iterationData.get(\"expectedStatus\");",
+							"",
+							"pm.test(\"Status code \" + expectedStatus, function () {",
+							"    pm.response.to.have.status(expectedStatus);",
+							"});",
+							"",
+							"pm.execution.setNextRequest(null);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"    const userfirstname = pm.iterationData.get(\"param\");",
+							"    pm.variables.set(\"userfirstname\", userfirstname);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "userapi@october",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "Numpy@gmail.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"userAddress\": {\n    \"plotNumber\": \"Plot-1234\",\n    \"street\": \"TP Road\",\n    \"state\": \"IL\",\n    \"country\": \"USA\",\n    \"zipCode\": 60004\n  },\n\n  \"user_first_name\": \"TestUser\",\n  \"user_last_name\": \"TestData\",\n  \"user_contact_number\": 2223334444,\n  \"user_email_id\": \"TestUser1011.TestData@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}{{ENDPOINT}}/{{userfirstname}}",
+					"host": [
+						"{{BASE_URL}}{{ENDPOINT}}"
+					],
+					"path": [
+						"{{userfirstname}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User By user ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const expectedStatus = pm.iterationData.get(\"expectedStatus\");",
+							"",
+							"pm.test(\"Status code \" + expectedStatus, function () {",
+							"    pm.response.to.have.status(expectedStatus);",
+							"});",
+							"pm.execution.setNextRequest(null);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Get values from iteration data",
+							"const userFirstName = pm.iterationData.get(\"param\");",
+							"",
+							"// Define the request options",
+							"const requestOptions = {",
+							"    url: 'https://userserviceapp-f5a54828541b.herokuapp.com/uap/users/username/' + userFirstName,",
+							"    method: 'GET', ",
+							"    header: {",
+							"        'Content-Type': 'application/json'",
+							"    }",
+							"};",
+							"",
+							"// Send the request",
+							"pm.sendRequest(requestOptions, function (err, res) {",
+							"    if (err) {",
+							"        console.log(err);",
+							"        return;",
+							"    }",
+							"",
+							"if (res.code === 200) {",
+							"    // Perform assertions on the response if needed",
+							"    pm.test(\"Response status is 200\", function () {",
+							"        pm.expect(res.status).to.eql(\"OK\");        ",
+							"        pm.expect(res.json()[0].user_first_name).to.eql(userFirstName);",
+							"        console.log(res.json()[0].user_id);",
+							"        pm.variables.set(\"userId\", res.json()[0].user_id);",
+							"    });",
+							"} else {",
+							"    pm.variables.set(\"userId\", 0);",
+							"}",
+							"    ",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "userapi@october",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "Numpy@gmail.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"userAddress\": {\n    \"plotNumber\": \"Plot-1234\",\n    \"street\": \"TP Road\",\n    \"state\": \"IL\",\n    \"country\": \"USA\",\n    \"zipCode\": 60004\n  },\n\n  \"user_first_name\": \"TestUser\",\n  \"user_last_name\": \"TestData\",\n  \"user_contact_number\": 2223334444,\n  \"user_email_id\": \"TestUser1011.TestData@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}{{ENDPOINT}}/{{userId}}",
+					"host": [
+						"{{BASE_URL}}{{ENDPOINT}}"
+					],
+					"path": [
+						"{{userId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{PASSWORD}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{USER_NAME}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"const requestType = pm.iterationData.get(\"requestType\");",
+					"",
+					"const baseURL = pm.iterationData.get(\"baseURL\");",
+					"const endpoint = pm.iterationData.get(\"endpoint\");",
+					"",
+					"pm.collectionVariables.set(\"BASE_URL\", baseURL);",
+					"pm.collectionVariables.set(\"ENDPOINT\", endpoint);",
+					"",
+					"",
+					" // or use pm.environment.get(\"requestType\");",
+					"// Control flow based on requestType",
+					"",
+					"if (requestType === \"ADD_NEW_USER\") {",
+					"    console.log(\"ADD_NEW_USER\")",
+					"    pm.execution.setNextRequest(\"Add New User\");",
+					"} else if (requestType === \"GET_ALL_USERS\") {",
+					"    console.log(\"GET_ALL_USERS\")",
+					"    pm.execution.setNextRequest(\"GET All Users\");",
+					"} else if (requestType === \"GET_USER_BY_ID\") {",
+					"    console.log(\"GET_USER_BY_ID\")",
+					"    pm.execution.setNextRequest(\"GET user by USER ID\");",
+					"} else if (requestType === \"GET_USER_BY_FNAME\") {",
+					"    console.log(\"GET_USER_BY_FNAME\")",
+					"    pm.execution.setNextRequest(\"GET user by USER First Name\");",
+					"} else if (requestType === \"UPDATE_USER\") {",
+					"    console.log(\"UPDATE_USER\")",
+					"    pm.execution.setNextRequest(\"Update user\");",
+					"} else if (requestType === \"DELETE_USER_BY_FNAME\") {",
+					"    console.log(\"DELETE_USER_BY_FNAME\")",
+					"    pm.execution.setNextRequest(\"Delete User By user first name\");",
+					"} else if (requestType === \"DELETE_USER_BY_ID\") {",
+					"    console.log(\"DELETE_USER_BY_ID\")",
+					"    pm.execution.setNextRequest(\"Delete User By user ID\");",
+					"} else {",
+					"    console.log(\"NO_MATCH\")",
+					"    pm.execution.setNextRequest(\"No Match Found!!!\");",
+					"}"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "https://userserviceapp-f5a54828541b.herokuapp.com/uap",
+			"type": "string"
+		},
+		{
+			"key": "USER_NAME",
+			"value": "Numpy@gmail.com",
+			"type": "string"
+		},
+		{
+			"key": "PASSWORD",
+			"value": "userapi@october",
+			"type": "string"
+		},
+		{
+			"key": "ENDPOINT",
+			"value": ""
+		}
+	]
+}

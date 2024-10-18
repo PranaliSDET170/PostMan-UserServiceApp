@@ -1,0 +1,354 @@
+[
+    {
+        "sr_no": "Create Test User",
+        "requestType": "ADD_NEW_USER",
+        "baseURL": "https://userserviceapp-f5a54828541b.herokuapp.com/uap",
+        "endpoint": "/createusers",
+        "requestbody": {
+          "userAddress": {
+            "plotNumber": "Plot-1234",
+            "street": "TP Road",
+            "state": "IL",
+            "country": "USA",
+            "zipCode": 60004
+          },
+          "user_first_name": "TestUserA",
+          "user_last_name": "TestData",
+          "user_contact_number": 2242244001,
+          "user_email_id": "TestUserA.TestData@gmail.com"
+        },
+        "param": null,
+        "expectedStatus": 201
+      },
+    {
+      "sr_no": "User_Post_001",
+      "requestType": "ADD_NEW_USER",
+      "baseURL": "https://userserviceapp-f5a54828541b.herokuapp.com/uap",
+      "endpoint": "/createusers",
+      "requestbody": {
+        "user_first_name": "TestUserB",
+        "user_last_name": "TestData",
+        "user_contact_number": 2242244002,
+        "user_email_id": "TestUserB.TestData@gmail.com"
+      },
+      "param": null,
+      "expectedStatus": 500
+    },
+    {
+      "sr_no": "User_Post_002",
+      "requestType": "ADD_NEW_USER",
+      "baseURL": "https://userserviceapp-f5a54828541b.herokuapp.com/uap",
+      "endpoint": "/createusers",
+      "requestbody": {
+        "userAddress": {
+          "plotNumber": "Plot-1234",
+          "street": "TP Road",
+          "state": "IL",
+          "country": "USA",
+          "zipCode": 60004
+        },
+        "user_first_name": "TestUserC",
+        "user_last_name": "TestData",
+        "user_contact_number": 2242244003,
+        "user_email_id": "TestUserC.TestData@gmail.com"
+      },
+      "param": null,
+      "expectedStatus": 201
+    },
+    {
+      "sr_no": "User_Post_005",
+      "requestType": "ADD_NEW_USER",
+      "baseURL": "https://userserviceapp-f5a54828541b.herokuapp.com/uap10",
+      "endpoint": "/createusers",
+      "requestbody": {
+        "userAddress": {
+          "plotNumber": "Plot-1234",
+          "street": "TP Road",
+          "state": "IL",
+          "country": "USA",
+          "zipCode": 60004
+        },
+        "user_first_name": "TestUserD",
+        "user_last_name": "TestData",
+        "user_contact_number": 2223334444,
+        "user_email_id": "TestUserD.TestData@gmail.com"
+      },
+      "param": null,
+      "expectedStatus": 404
+    },
+    {
+      "sr_no": "User_Post_006",
+      "requestType": "ADD_NEW_USER",
+      "baseURL": "https://userserviceapp-f5a54828541b.herokuapp.com/uap",
+      "endpoint": "/createusers10",
+      "requestbody": {
+        "userAddress": {
+          "plotNumber": "Plot-      1234",
+          "street": "TP Road",
+          "state": "IL",
+          "country": "USA",
+          "zipCode": 60004
+        },
+        "user_first_name": "TestUserD",
+        "user_last_name": "TestData",
+        "user_contact_number": 2223334444,
+        "user_email_id": "TestUserD.TestData@gmail.com"
+      },
+      "param": null,
+      "expectedStatus": 404
+    },
+    {
+      "sr_no": "User_Post_009",
+      "requestType": "ADD_NEW_USER",
+      "baseURL": "https://userserviceapp-f5a54828541b.herokuapp.com/uap",
+      "endpoint": "/createusers",
+      "requestbody": {
+        "userAddress": {
+          "plotNumber": "Plot-      1234",
+          "street": "TP Road",
+          "state": "IL",
+          "country": "USA",
+          "zipCode": 60004
+        },
+        "user_first_name": "TestUserD",
+        "user_last_name": "TestData",
+        "user_email_id": "TestUserD.TestData@gmail.com"
+      },
+      "param": null,
+      "expectedStatus": 400
+    },
+    {
+      "sr_no": "User_Post_010",
+      "requestType": "ADD_NEW_USER",
+      "baseURL": "https://userserviceapp-f5a54828541b.herokuapp.com/uap",
+      "endpoint": "/createusers",
+      "requestbody": {
+        "userAddress": {
+          "plotNumber": "Plot-      1234",
+          "street": "TP Road",
+          "state": "IL",
+          "country": "USA",
+          "zipCode": 60004
+        },
+        "user_first_name": "TestUserD",
+        "user_last_name": "TestData",
+        "user_contact_number": 22233323
+      },
+      "param": null,
+      "expectedStatus": 400
+    },
+    {
+      "sr_no": "User_GetALL_001",
+      "requestType": "GET_ALL_USERS",
+      "baseURL": "https://userserviceapp-f5a54828541b.herokuapp.com/uap",
+      "endpoint": "/users",
+      "requestbody": null,
+      "param": null,
+      "expectedStatus": 200
+    },
+    {
+      "sr_no": "User_GetALL_003",
+      "requestType": "GET_ALL_USERS",
+      "baseURL": "https://userserviceapp-f5a54828541b.herokuapp.com/uap35",
+      "endpoint": "/users",
+      "requestbody": null,
+      "param": null,
+      "expectedStatus": 404
+    },
+    {
+      "sr_no": "User_GetALL_004",
+      "requestType": "GET_ALL_USERS",
+      "baseURL": "https://userserviceapp-f5a54828541b.herokuapp.com/uap",
+      "endpoint": "/usersaaaa",
+      "requestbody": null,
+      "param": null,
+      "expectedStatus": 404
+    },
+    {      
+        "sr_no": "User_GET_ByID_001",
+        "requestType": "GET_USER_BY_ID",
+        "baseURL": "https://userserviceapp-f5a54828541b.herokuapp.com/uap",
+        "endpoint": "/user",
+        "requestbody": null,
+        "param": 10125,
+        "expectedStatus": 200
+      },
+      {      
+        "sr_no": "User_GET_ByID_002",
+        "requestType": "GET_USER_BY_ID",
+        "baseURL": "https://userserviceapp-f5a54828541b.herokuapp.com/uap",
+        "endpoint": "/user",
+        "requestbody": null,
+        "param": "10@125",
+        "expectedStatus": 400
+      },
+      {      
+        "sr_no": "User_GET_ByID_005",
+        "requestType": "GET_USER_BY_ID",
+        "baseURL": "https://userserviceapp-f5a54828541b.herokuapp.com/uap",
+        "endpoint": "/user50",
+        "requestbody": null,
+        "param": 10125,
+        "expectedStatus": 404
+      },    {      
+        "sr_no": "User_GET_ByID_006",
+        "requestType": "GET_USER_BY_ID",
+        "baseURL": "https://userserviceapp-f5a54828541b.herokuapp.com/uap",
+        "endpoint": "/user",
+        "requestbody": null,
+        "param": 22501,
+        "expectedStatus": 404
+      },
+      {
+        "sr_no": "User_GET_ByFirstName_001",
+        "requestType": "GET_USER_BY_FNAME",
+        "baseURL": "https://userserviceapp-f5a54828541b.herokuapp.com/uap",
+        "endpoint": "/users/username/",        
+        "requestbody": null,
+        "param": "TestUserA",
+        "expectedStatus": 200
+      },
+      {
+        "sr_no": "User_GET_ByFirstName_004",
+        "requestType": "GET_USER_BY_FNAME",
+        "baseURL": "https://userserviceapp-f5a54828541b.herokuapp.com/uap850",
+        "endpoint": "/users/username/",        
+        "requestbody": null,
+        "param": "TestUserD",
+        "expectedStatus": 404
+      },
+      {
+        "sr_no": "User_GET_ByFirstName_006",
+        "requestType": "GET_USER_BY_FNAME",
+        "baseURL": "https://userserviceapp-f5a54828541b.herokuapp.com/uap",
+        "endpoint": "/users/username/",        
+        "requestbody": null,
+        "param": "Tes",
+        "expectedStatus": 404
+      },
+      {
+        "sr_no": "User_put_001",
+        "requestType": "UPDATE_USER",
+        "baseURL": "https://userserviceapp-f5a54828541b.herokuapp.com/uap",
+        "endpoint": "/updateuser",        
+        "requestbody": {
+            "userAddress": {
+              "plotNumber": "Plot-2222",
+              "street": "New TP Road",
+              "state": "IL",
+              "country": "USA",
+              "zipCode": 60004
+            },
+            "user_first_name": "TestUserC",
+            "user_last_name": "TestData",
+            "user_contact_number": 2242244003,
+            "user_email_id": "TestUserC.TestData@gmail.com"
+          },
+        "param": "TestUserC",
+        "expectedStatus": 200
+      },
+      {
+        "sr_no": "User_put_004",
+        "requestType": "UPDATE_USER",
+        "baseURL": "https://userserviceapp-f5a54828541b.herokuapp.com/uap",
+        "endpoint": "/updateuser",        
+        "requestbody": null,
+        "param": "TestUserC",
+        "expectedStatus": 400
+      },
+      {
+        "sr_no": "User_put_006",
+        "requestType": "UPDATE_USER",
+        "baseURL": "https://userserviceapp-f5a54828541b.herokuapp.com/uap",
+        "endpoint": "/updateuser",
+        "requestbody": {
+            "userAddress": {
+              "plotNumber": "Plot-2222",
+              "street": "New TP Road",
+              "state": "IL",
+              "country": "USA",
+              "zipCode": 60004
+            },
+            "user_first_name": "TestUserC",
+            "user_last_name": "TestData123",
+            "user_contact_number": 2242244003,
+            "user_email_id": "TestUserC.TestData@gmail.com"
+          },
+        "param": "TestUserC",
+        "expectedStatus": 400
+      },
+      {
+       "sr_no": "User_Delete_ByFirstName_002",
+        "requestType": "DELETE_USER_BY_FNAME",
+        "baseURL": "https://userserviceapp-f5a54828541b.herokuapp.com/uap",
+        "endpoint": "/deleteuser/username",
+        "requestbody": null,
+        "param": "TestUserC",
+        "expectedStatus": 200
+      },
+      {
+        "sr_no": "User_Delete_ByFirstName_003",
+         "requestType": "DELETE_USER_BY_FNAME",
+         "baseURL": "https://userserviceapp-f5a54828541b.herokuapp.com/uap",
+         "endpoint": "/deleteuser/username",
+         "requestbody": null,
+         "param": "TestUserrrrrrrrrrrrrr",
+         "expectedStatus": 404
+       },
+       {
+        "sr_no": "User_Delete_ByFirstName_004",
+         "requestType": "DELETE_USER_BY_FNAME",
+         "baseURL": "https://userserviceapp-f5a54828541b.herokuapp.com/uapaaaa",
+         "endpoint": "/deleteuser/username",
+         "requestbody": null,
+         "param": "TestUserA",
+         "expectedStatus": 404
+       },
+       {
+        "sr_no": "User_Delete_ByFirstName_005",
+         "requestType": "DELETE_USER_BY_FNAME",
+         "baseURL": "https://userserviceapp-f5a54828541b.herokuapp.com/uap",
+         "endpoint": "/deleteuser/username-invalid",
+         "requestbody": null,
+         "param": "TestUserA",
+         "expectedStatus": 404
+       },
+       {
+        "sr_no": "User_Delete_ById_002",
+         "requestType": "DELETE_USER_BY_ID",
+         "baseURL": "https://userserviceapp-f5a54828541b.herokuapp.com/uap",
+         "endpoint": "/deleteuser",
+        "requestbody": null,
+        "param": "TestUserA",
+        "expectedStatus": 200
+      },
+      {
+        "sr_no": "User_Delete_ById_003",
+         "requestType": "DELETE_USER_BY_ID",
+         "baseURL": "https://userserviceapp-f5a54828541b.herokuapp.com/uap",
+         "endpoint": "/deleteuser",
+        "requestbody": null,
+        "param": "TestUserNotExist",
+        "expectedStatus": 404
+      },
+      {
+        "sr_no": "User_Delete_ById_005",
+         "requestType": "DELETE_USER_BY_ID",
+         "baseURL": "https://userserviceapp-f5a54828541b.herokuapp.com/uap-invalid",
+         "endpoint": "/deleteuser",
+        "requestbody": null,
+        "param": "TestUserA",
+        "expectedStatus": 404
+      },
+      {
+        "sr_no": "User_Delete_ById_006",
+         "requestType": "DELETE_USER_BY_ID",
+         "baseURL": "https://userserviceapp-f5a54828541b.herokuapp.com/uap",
+         "endpoint": "/deleteuser-invalid",
+        "requestbody": null,
+        "param": "TestUserA",
+        "expectedStatus": 404
+      }
+
+
+  ]
